@@ -1,0 +1,23 @@
+{
+  "modinfoversion": 2,
+  "modlist" : 
+[
+{
+  "modid": "misctweaks",
+  "name": "MiscTweaks",
+  "description": "A mod by me adds stuff",
+  "version": "0.5.1",
+  "mcversion": "1.6.2",
+  "url": "http://adf.ly/SGgLo",
+  "authors": [
+  "fhbgds"
+  ],
+  "credits": "",
+  "parent":"",
+  "requiredMods": [
+  "Forge"
+  ],
+  "useDependancyInformation": "true"
+}
+]
+}
