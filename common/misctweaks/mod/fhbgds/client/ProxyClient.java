@@ -1,14 +1,9 @@
 package misctweaks.mod.fhbgds.client;
 
-import misctweaks.mod.fhbgds.blocks.BlockFurnaceBench;
+import misctweaks.mod.fhbgds.client.gui.FurnaceBenchGUI;
 import misctweaks.mod.fhbgds.common.ProxyCommon;
 import misctweaks.mod.fhbgds.entities.EntityMagicCreative;
-import misctweaks.mod.fhbgds.entities.EntitySpecialCreeper;
-import misctweaks.mod.fhbgds.lib.Loader;
-import misctweaks.mod.fhbgds.render.ModelSpecialCreeper;
 import misctweaks.mod.fhbgds.render.RenderMagic;
-import misctweaks.mod.fhbgds.render.RenderSpecialCreeper;
-import misctweaks.mod.fhbgds.client.gui.FurnaceBenchGUI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,7 +18,6 @@ public class ProxyClient extends ProxyCommon{
 
 	@Override
 	public void addRenderer(){
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpecialCreeper.class, new RenderSpecialCreeper(new ModelSpecialCreeper(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMagicCreative.class, new RenderMagic(0));
 	}
 

@@ -1,5 +1,4 @@
 import misctweaks.mod.fhbgds.common.ProxyCommon;
-import misctweaks.mod.fhbgds.entities.EntitySpecialCreeper;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import misctweaks.mod.fhbgds.world.biome.BiomeDesolatePlains;
@@ -59,18 +58,9 @@ public class MiscTweaks {
 //--------------------------- Post-Initializes the mod ---------------------------\\
 @EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
-		initializeEntities();
 		BiomeGenBase myBiome1 = new BiomeDesolatePlains(26);
 		GameRegistry.addBiome(myBiome1);
 		BiomeDictionary.registerBiomeType(myBiome1, BiomeDictionary.Type.WASTELAND);
 		System.out.println("[" + Reference.MOD_ID + "] Everything has been successfully broken!");
-}
-	
-//--------------------------- Post Init methods ---------------------------\\
-public void initializeEntities(){
-	BiomeGenBase[] plains = BiomeDictionary.getBiomesForType(BiomeDictionary.Type.PLAINS);
-	
-	EntityRegistry.registerModEntity(EntitySpecialCreeper.class, "SpecialCreeper", 1, this, 32, 5, true);
-	EntityRegistry.addSpawn(EntitySpecialCreeper.class, 1, 4, 6, EnumCreatureType.monster, plains);
-}
+	}
 }

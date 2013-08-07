@@ -16,7 +16,6 @@ import misctweaks.mod.fhbgds.items.ItemFlintIngot;
 import misctweaks.mod.fhbgds.items.ItemFlintPick;
 import misctweaks.mod.fhbgds.items.ItemMagicCore;
 import misctweaks.mod.fhbgds.items.ItemMetalSheet;
-import misctweaks.mod.fhbgds.items.ItemSpawnEgg;
 import misctweaks.mod.fhbgds.items.ItemStoneStick;
 import misctweaks.mod.fhbgds.items.ItemWand;
 import misctweaks.mod.fhbgds.items.ItemWandCreative;
@@ -92,9 +91,6 @@ public class Loader {
 			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep)
 			.setLightValue(1.5F).setCreativeTab(CreativeTabMiscTweaks.tabMiscTweaks);
 	
-		spawnEgg = new ItemSpawnEgg(5005).setUnlocalizedName("spawnEgg")
-			.setCreativeTab(CreativeTabMiscTweaks.tabMiscTweaks);
-	
 		metalSheet = new BlockMetalSheet(515, Material.iron).setUnlocalizedName("metalSheet");
 	
 		magicCore = new ItemMagicCore(5008).setUnlocalizedName("magicCore")
@@ -147,7 +143,8 @@ public class Loader {
 		MinecraftForge.setBlockHarvestLevel(metalSheet, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(metalStack, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(smoothQuartz, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(blockAsh, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(blockAsh, "shovel", 1);
+		MinecraftForge.setBlockHarvestLevel(blockAshHard, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(quartzFence, "pickaxe", 1);
 	}
 
@@ -192,8 +189,8 @@ public class Loader {
 		GameRegistry.addRecipe(new ItemStack(metalStack, 16), new Object[] {"###", "III", "III", '#', itemMetalSheet, 'I',
 			Block.blockIron});
 		GameRegistry.addRecipe(new ItemStack(smoothQuartz, 4), new Object[] {"_", "#", '_', itemMetalSheet, '#', Block.blockNetherQuartz});
-		GameRegistry.addRecipe(new ItemStack(blockAsh), new Object[] {"###", "###", "###", '#', ash});
-		GameRegistry.addRecipe(new ItemStack(blockAshHard), new Object[] {"###", "###", "###", '#', blockAsh});
+		GameRegistry.addRecipe(new ItemStack(blockAsh), new Object[] {"##", "##", '#', ash});
+		GameRegistry.addRecipe(new ItemStack(blockAshHard), new Object[] {"##", "##", '#', blockAsh});
 		GameRegistry.addRecipe(new ItemStack(quartzFence), new Object[] {"# #", "###", "# #", '#', Item.netherQuartz});
 
 	}
