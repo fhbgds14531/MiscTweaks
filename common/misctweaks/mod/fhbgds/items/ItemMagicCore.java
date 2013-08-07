@@ -22,7 +22,7 @@ public class ItemMagicCore extends Item {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack par1ItemStack){
+	public boolean hasEffect(ItemStack stack, int renderPass){
 		return true;
 	}
 	

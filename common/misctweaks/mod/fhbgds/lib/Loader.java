@@ -152,8 +152,7 @@ public class Loader {
 	}
 
 	public static void registerNames(String par1String){
-		switch(par1String){
-		case "Blocks/Items":
+		if(par1String == "Blocks/Items"){
 			LanguageRegistry.instance().addStringLocalization("tile.flintBlock.name", "en_US", "Block of Flint");
 			LanguageRegistry.instance().addStringLocalization("item.flintIngot.name", "en_US", "Flint Ingot");
 			LanguageRegistry.instance().addStringLocalization("item.itemMetalSheet.name", "en_US", "Sheet of Metal");
@@ -171,10 +170,8 @@ public class Loader {
 			LanguageRegistry.instance().addStringLocalization("tile.blockAsh.name", "en_US", "Block of Ash");
 			LanguageRegistry.instance().addStringLocalization("tile.blockAshHard.name", "en_US", "Compressed Ash Block");
 			LanguageRegistry.instance().addStringLocalization("tile.quartzFence.name", "en_US", "Quartz Fance");
-			break;
-		case "Entities":
+		}else if(par1String == "Entities"){
 			LanguageRegistry.instance().addStringLocalization("entity.SpecialCreeper.name", "en_US", "UltraCreeper");
-			break;
 		}
 	}
 	
