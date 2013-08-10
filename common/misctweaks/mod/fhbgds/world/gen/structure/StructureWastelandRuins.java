@@ -39,7 +39,7 @@ public class StructureWastelandRuins extends StructureComponent{
     public boolean addComponentParts(World world, Random random, StructureBoundingBox sBB){
 		
     	int y = (int) (world.getTopSolidOrLiquidBlock(sBB.minX, sBB.minZ) - Math.floor((random.nextFloat() * 3.7)));
-    	System.out.println("[" + Reference.MOD_ID + "] Generating ruins at: " + sBB.minX + ", " + y + ", " + sBB.minZ);
+    	//System.out.println("[" + Reference.MOD_ID + "] Generating ruins at: " + sBB.minX + ", " + y + ", " + sBB.minZ);
 		
     	//----------Floor----------------------
     	for(int x = sBB.minX; x <= sBB.maxX; ++x){
@@ -93,19 +93,19 @@ public class StructureWastelandRuins extends StructureComponent{
     		WeightedRandomChestContent.generateChestContents(random, ruinsChestContents, chest1, 5);
     	}
     	
-    	if(random.nextInt(15) < 10){
-    		int x = sBB.minX + random.nextInt(7);
-    		int y1 = y;
-    		int z = sBB.minZ;
-    		world.setBlock(x, y1, z, Block.doorWood.blockID);
-    		//world.setBlock(x, y1 + 1, z, Block.doorWood.blockID);
-    	}else{
-    		int z = sBB.minZ + random.nextInt(7);
-    		int y1 = y;
-    		int x = sBB.minX;
-    		world.setBlock(x, y1, z, Block.doorWood.blockID);
-    		//world.setBlock(x, y1 + 1, z, Block.doorWood.blockID);
-    	}
+//    	if(random.nextInt(15) < 10){
+//    		int x = sBB.minX + random.nextInt(7);
+//    		int y1 = y;
+//    		int z = sBB.minZ;
+//    		world.setBlock(x, y1, z, Block.doorWood.blockID);
+//    	}else{
+//    		int z = sBB.minZ + random.nextInt(7);
+//    		int y1 = y;
+//    		int x = sBB.minX;
+//    		world.setBlock(x, y1, z, Block.doorWood.blockID);
+//    		world.setBlock(x, y1 + 1, z, Block.doorWood.blockID);
+//    	}
+    	
     	//------------Walls - Level 2-------------------
     	for(int x = sBB.minX; x <= sBB.maxX; x++){
     		int z = sBB.minZ;
