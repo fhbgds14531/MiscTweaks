@@ -12,14 +12,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMagicCreative extends EntityThrowable{
+public class EntityMagic extends EntityThrowable{
 	
 	public final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID + ":textures/items/magicCore.png");
 	private float damage = 0.0F;
 	private float explosionSize;
 	private int range;
 
-	public EntityMagicCreative(World world, EntityLivingBase player, float damage, float explosionSize, int range){
+	public EntityMagic(World world, EntityLivingBase player, float damage, float explosionSize, int range){
 		super(world, player);
 		this.setDamage(damage);
 		this.setExplosionSize(explosionSize);
@@ -74,10 +74,10 @@ public class EntityMagicCreative extends EntityThrowable{
 		return 0.0F;
 	}
 	
-	@Override
-	protected void entityInit(){
-		this.renderDistanceWeight = 10.0D;
-	}
+//	@Override
+//	protected void entityInit(){
+//		this.renderDistanceWeight = 10.0D;
+//	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {

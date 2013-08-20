@@ -1,6 +1,6 @@
 package misctweaks.mod.fhbgds.render;
 
-import misctweaks.mod.fhbgds.entities.EntityMagicCreative;
+import misctweaks.mod.fhbgds.entities.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.Tessellator;
@@ -28,7 +28,7 @@ public class RenderMagic extends Render{
         super();
         }
 
-    public void doRenderMagic(EntityMagicCreative par1Entity, double par2, double par4, double par6, float par8, float par9)
+    public void doRenderMagic(EntityMagic par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         this.func_110777_b(par1Entity);
@@ -58,7 +58,7 @@ public class RenderMagic extends Render{
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation func_110790_a(EntityMagicCreative par1EntityMagic)
+    protected ResourceLocation func_110790_a(EntityMagic par1EntityMagic)
     {
         return texture ;
     }
@@ -71,12 +71,12 @@ public class RenderMagic extends Render{
     @Override
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110790_a((EntityMagicCreative)par1Entity);
+        return this.func_110790_a((EntityMagic)par1Entity);
     }
 
     @Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        this.doRenderMagic((EntityMagicCreative)par1Entity, par2, par4, par6, par8, par9);
+        this.doRenderMagic((EntityMagic)par1Entity, par2, par4, par6, par8, par9);
     }
 }

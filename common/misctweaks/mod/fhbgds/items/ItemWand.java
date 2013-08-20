@@ -1,6 +1,6 @@
 package misctweaks.mod.fhbgds.items;
 
-import misctweaks.mod.fhbgds.entities.EntityMagicCreative;
+import misctweaks.mod.fhbgds.entities.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,7 +72,7 @@ public class ItemWand extends ItemBow{
         
         float f = (float)j / 20.0F;
 
-        EntityMagicCreative projectile = new EntityMagicCreative(world, player, 5, 1, 10);
+        EntityMagic projectile = new EntityMagic(world, player, 5, 1, 10);
 
         world.spawnEntityInWorld(projectile);
         projectile.worldObj.playSoundAtEntity(player, "misctweaks:pew", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);

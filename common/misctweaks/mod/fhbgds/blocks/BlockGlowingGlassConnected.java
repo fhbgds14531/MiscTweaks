@@ -17,10 +17,6 @@ public class BlockGlowingGlassConnected extends Block {
 	private int renderPass;
 	private boolean shouldRenderSelectionBox = true;
 	
-	/** @author fhbdgs
-	 * 
-	 */
-	
 	public BlockGlowingGlassConnected(int id, Material material) {
 		super(id, material);
 		boolean hasAlpha;
@@ -597,7 +593,7 @@ public class BlockGlowingGlassConnected extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons (IconRegister r){
-    	this.blockIcon = r.registerIcon(Reference.MOD_ID + ":/glass/glass");
+    	this.blockIcon = r.registerIcon(Reference.MOD_ID + ":glass/glass");
     	icons[0] = r.registerIcon(Reference.MOD_ID + ":glass/glass");
         icons[1] = r.registerIcon(Reference.MOD_ID + ":glass/glass_1_d");
         icons[2] = r.registerIcon(Reference.MOD_ID + ":glass/glass_1_u");

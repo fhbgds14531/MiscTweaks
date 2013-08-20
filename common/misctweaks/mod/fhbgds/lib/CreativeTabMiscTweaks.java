@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
 
 public class CreativeTabMiscTweaks extends CreativeTabs {
 
-	public static final CreativeTabs tabMiscTweaks = new CreativeTabMiscTweaks("MiscTweaks");
-	
 	public CreativeTabMiscTweaks(String label) {
 		super(label);
 	}
@@ -17,7 +15,7 @@ public class CreativeTabMiscTweaks extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack(){
-		return new ItemStack(Loader.flintBlock);
+		return new ItemStack(Loader.flintIngot);
 	}
 	
 	@Override

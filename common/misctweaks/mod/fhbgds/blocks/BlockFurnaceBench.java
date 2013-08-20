@@ -10,6 +10,8 @@ import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
@@ -18,6 +20,7 @@ import net.minecraft.world.World;
 public class BlockFurnaceBench extends BlockContainer {
 
 	private static boolean keepBlockInventory;
+	public int internalFuelLevel;
 
 	public BlockFurnaceBench(int par1){
 		super(par1, Material.rock);
@@ -33,27 +36,50 @@ public class BlockFurnaceBench extends BlockContainer {
         return par1 == 1 ? Block.workbench.getBlockTextureFromSide(1) : Block.furnaceIdle.getBlockTextureFromSide(1);
     }
 	
+//	@Override
+//	public void onBlockAdded(World world, int x, int y, int z){
+//		world.setBlockTileEntity(x, y, z, new TileEntityFurnaceBench());
+//	}
+	
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public void breakBlock(World world, int par2, int par3, int par4, int par5, int par6){
+        super.breakBlock(world, par2, par3, par4, par5, par6);
+        world.removeBlockTileEntity(par2, par3, par4);
+    }
+	
+	@Override
+	public boolean onBlockActivated(World world, int par2, int par3, int par4, 
+			EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if (par1World.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
         else
         {
-            TileEntityFurnace tileEntityFurnaceBench = (TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntityFurnaceBench tEnt = (TileEntityFurnaceBench)world.getBlockTileEntity(par2, par3, par4);
 
-            if (tileEntityFurnaceBench != null)
-            {
-                par5EntityPlayer.displayGUIFurnace(tileEntityFurnaceBench);
+            if(tEnt != null){
+            	
+            	ItemStack item = player.getCurrentEquippedItem();
+            	
+            	if(item != null && item.itemID == Item.coal.itemID){
+            		int itemStackSize = item.stackSize;
+            		if(!player.capabilities.isCreativeMode){
+            			item.stackSize = 0;
+            		}
+            		tEnt.fuelLevel += itemStackSize;
+            	}else if(item == null){
+            		
+            	}
+            	
             }
 
             return true;
         }
     }
 	
-	public static void updateFurnaceBlockState(boolean par0, World world, int x, int y, int z){
+	public static void updateFurnaceBenchState(boolean par0, World world, int x, int y, int z){
         int l = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getBlockTileEntity(x, y, z);
         keepBlockInventory = true;
@@ -76,7 +102,7 @@ public class BlockFurnaceBench extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return null;
+		return new TileEntityFurnaceBench();
 	}
 
 }

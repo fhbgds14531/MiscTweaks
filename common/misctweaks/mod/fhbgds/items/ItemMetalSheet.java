@@ -22,7 +22,7 @@ public class ItemMetalSheet extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister){
-		this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(9));
+		this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":m" + this.getUnlocalizedName().substring(10));
 	}
 	
 	@Override

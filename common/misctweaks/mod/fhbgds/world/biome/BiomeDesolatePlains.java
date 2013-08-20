@@ -16,9 +16,8 @@ public class BiomeDesolatePlains extends BiomeGenBase {
 	public BiomeDesolatePlains(int par1) {
 		super(par1);
 		this.setMinMaxHeight(0.1f, 0.2f);
-		this.setTemperatureRainfall(-1.0f, 1.0f);
+		this.setTemperatureRainfall(0.05f, 0.8f);
 		this.setEnableSnow();
-		this.setDisableRain();
 		this.setColor(522674);
 		this.setBiomeName("Desolate Plains");
 		this.topBlock = (byte) Loader.blockAsh.blockID;

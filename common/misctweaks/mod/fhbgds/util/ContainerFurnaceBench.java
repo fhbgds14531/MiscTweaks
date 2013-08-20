@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.client;
+package misctweaks.mod.fhbgds.util;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
