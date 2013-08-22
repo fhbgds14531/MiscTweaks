@@ -1,26 +1,26 @@
 package misctweaks.mod.fhbgds.client.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
-import misctweaks.mod.fhbgds.inventory.ContainerMyFurnace;
+import misctweaks.mod.fhbgds.entities.TileEntityAlloyForge;
+import misctweaks.mod.fhbgds.inventory.ContainerAlloyForge;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
-@SideOnly(Side.CLIENT)
-public class GuiMyFurnace extends GuiContainer
-{
-    private static final ResourceLocation field_110410_t = new ResourceLocation("misctweaks:textures/gui/furnace.png");
-    private TileEntityMyFurnace furnaceInventory;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-    public GuiMyFurnace(InventoryPlayer player, TileEntityMyFurnace furnace)
+@SideOnly(Side.CLIENT)
+public class GuiAlloyForge extends GuiContainer
+{
+    private static final ResourceLocation field_110410_t = new ResourceLocation("misctweaks:textures/gui/alloyForge.png");
+    private TileEntityAlloyForge furnaceInventory;
+
+    public GuiAlloyForge(InventoryPlayer player, TileEntityAlloyForge furnace)
     {
-        super(new ContainerMyFurnace(player, furnace));
+        super(new ContainerAlloyForge(player, furnace));
         this.furnaceInventory = furnace;
     }
 

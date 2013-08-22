@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.items;
+package misctweaks.mod.fhbgds.item;
 
 import java.util.List;
 

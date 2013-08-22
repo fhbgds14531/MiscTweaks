@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.items;
+package misctweaks.mod.fhbgds.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

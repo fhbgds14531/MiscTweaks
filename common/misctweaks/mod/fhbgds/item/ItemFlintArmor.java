@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.items;
+package misctweaks.mod.fhbgds.item;
 
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
@@ -37,7 +37,7 @@ public class ItemFlintArmor extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister r){
 		Loader.helmet.itemIcon = r.registerIcon(Reference.MOD_ID + ":flintHelmet");
-		Loader.plate.itemIcon = r.registerIcon(Reference.MOD_ID + ":flintchestPlate");
+		Loader.plate.itemIcon = r.registerIcon(Reference.MOD_ID + ":flintChestplate");
 		Loader.leggings.itemIcon = r.registerIcon(Reference.MOD_ID + ":flintLeggings");
 		Loader.boots.itemIcon = r.registerIcon(Reference.MOD_ID + ":flintBoots");
 	}

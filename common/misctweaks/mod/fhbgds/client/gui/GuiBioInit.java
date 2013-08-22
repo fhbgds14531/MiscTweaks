@@ -1,26 +1,26 @@
 package misctweaks.mod.fhbgds.client.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
-import misctweaks.mod.fhbgds.inventory.ContainerMyFurnace;
+import misctweaks.mod.fhbgds.entities.TileEntityBioInit;
+import misctweaks.mod.fhbgds.inventory.ContainerBioInit;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
-@SideOnly(Side.CLIENT)
-public class GuiMyFurnace extends GuiContainer
-{
-    private static final ResourceLocation field_110410_t = new ResourceLocation("misctweaks:textures/gui/furnace.png");
-    private TileEntityMyFurnace furnaceInventory;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-    public GuiMyFurnace(InventoryPlayer player, TileEntityMyFurnace furnace)
+@SideOnly(Side.CLIENT)
+public class GuiBioInit extends GuiContainer
+{
+    private static final ResourceLocation field_110410_t = new ResourceLocation("misctweaks:textures/gui/bioInit.png");
+    private TileEntityBioInit furnaceInventory;
+
+    public GuiBioInit(InventoryPlayer player, TileEntityBioInit furnace)
     {
-        super(new ContainerMyFurnace(player, furnace));
+        super(new ContainerBioInit(player, furnace));
         this.furnaceInventory = furnace;
     }
 

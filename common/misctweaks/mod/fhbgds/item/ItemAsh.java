@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.items;
+package misctweaks.mod.fhbgds.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -6,9 +6,9 @@ import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class ItemStoneStick extends Item{
-
-	public ItemStoneStick(int id) {
+public class ItemAsh extends Item {
+	
+	public ItemAsh(int id) {
 		super(id);
 	}
 

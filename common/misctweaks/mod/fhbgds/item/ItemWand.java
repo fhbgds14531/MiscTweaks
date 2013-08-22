@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.items;
+package misctweaks.mod.fhbgds.item;
 
 import misctweaks.mod.fhbgds.entities.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Reference;

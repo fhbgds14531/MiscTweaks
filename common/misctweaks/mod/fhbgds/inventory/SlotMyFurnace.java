@@ -1,5 +1,6 @@
-package misctweaks.mod.fhbgds.util;
+package misctweaks.mod.fhbgds.inventory;
 
+import misctweaks.mod.fhbgds.util.MyFurnaceRecipes;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

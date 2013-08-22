@@ -1,5 +1,7 @@
 package misctweaks.mod.fhbgds.lib;
 
+import misctweaks.mod.fhbgds.blocks.AlloyForge;
+import misctweaks.mod.fhbgds.blocks.BioInit;
 import misctweaks.mod.fhbgds.blocks.BlockAsh;
 import misctweaks.mod.fhbgds.blocks.BlockAshHard;
 import misctweaks.mod.fhbgds.blocks.BlockDirtyWater;
@@ -15,17 +17,21 @@ import misctweaks.mod.fhbgds.blocks.BlockQuartzFence;
 import misctweaks.mod.fhbgds.blocks.BlockSmoothQuartz;
 import misctweaks.mod.fhbgds.blocks.BlockSmoothStairs;
 import misctweaks.mod.fhbgds.blocks.MyFurnace;
+import misctweaks.mod.fhbgds.entities.TileEntityAlloyForge;
+import misctweaks.mod.fhbgds.entities.TileEntityBioInit;
 import misctweaks.mod.fhbgds.entities.TileEntityFurnaceBench;
 import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
-import misctweaks.mod.fhbgds.items.ItemAsh;
-import misctweaks.mod.fhbgds.items.ItemFlintArmor;
-import misctweaks.mod.fhbgds.items.ItemFlintIngot;
-import misctweaks.mod.fhbgds.items.ItemFlintPick;
-import misctweaks.mod.fhbgds.items.ItemMagicCore;
-import misctweaks.mod.fhbgds.items.ItemMetalSheet;
-import misctweaks.mod.fhbgds.items.ItemStoneStick;
-import misctweaks.mod.fhbgds.items.ItemWand;
-import misctweaks.mod.fhbgds.items.ItemWandCreative;
+import misctweaks.mod.fhbgds.item.ItemAsh;
+import misctweaks.mod.fhbgds.item.ItemBiomash;
+import misctweaks.mod.fhbgds.item.ItemFlintArmor;
+import misctweaks.mod.fhbgds.item.ItemFlintIngot;
+import misctweaks.mod.fhbgds.item.ItemFlintPick;
+import misctweaks.mod.fhbgds.item.ItemMagicCore;
+import misctweaks.mod.fhbgds.item.ItemMetalSheet;
+import misctweaks.mod.fhbgds.item.ItemStoneStick;
+import misctweaks.mod.fhbgds.item.ItemWand;
+import misctweaks.mod.fhbgds.item.ItemWandCreative;
+import misctweaks.mod.fhbgds.util.AlloyForgeRecipes;
 import misctweaks.mod.fhbgds.util.MyFurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -146,6 +152,20 @@ public class Loader {
 		
 		boots = (ItemFlintArmor) new ItemFlintArmor(5093, 3, FLINT_ARMOR).setUnlocalizedName("flintBoots")
 				.setCreativeTab(tab);
+		
+		alloyForgeIdle = new AlloyForge(526, false).setUnlocalizedName("alloyForge")
+				.setHardness(4.0F).setResistance(4.0F);//.setCreativeTab(tab);
+		
+		alloyForgeActive = new AlloyForge(527, true).setUnlocalizedName("alloyForgeActive")
+				.setHardness(4.0F).setResistance(4.0F);
+		
+		bioInitIdle = new BioInit(528, false).setUnlocalizedName("bioInitIdle").setCreativeTab(tab)
+				.setHardness(4.0F).setResistance(4.0F);
+		
+		bioInit = new BioInit(529, true).setUnlocalizedName("bioInitActive")
+				.setHardness(4.0F).setResistance(4.0F);
+		
+		biomash = new ItemBiomash(5094).setUnlocalizedName("biomash").setCreativeTab(tab);
 	}
 	
 	public static void registerBlocksAndFluids(){
@@ -164,8 +184,14 @@ public class Loader {
 		GameRegistry.registerBlock(myFurnaceIdle, Reference.MOD_ID + myFurnaceIdle.getUnlocalizedName());
 		GameRegistry.registerBlock(myFurnaceActive, Reference.MOD_ID + myFurnaceActive.getUnlocalizedName());
 		GameRegistry.registerBlock(flintIngotBlock, Reference.MOD_ID + flintIngotBlock.getUnlocalizedName());
+		GameRegistry.registerBlock(alloyForgeIdle, Reference.MOD_ID + alloyForgeIdle.getUnlocalizedName());
+		GameRegistry.registerBlock(alloyForgeActive, Reference.MOD_ID + alloyForgeActive.getUnlocalizedName());
+		GameRegistry.registerBlock(bioInitIdle, Reference.MOD_ID + bioInitIdle.getUnlocalizedName());
+		GameRegistry.registerBlock(bioInit, Reference.MOD_ID + bioInit.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityFurnaceBench.class, "FurnaceBench");
 		GameRegistry.registerTileEntity(TileEntityMyFurnace.class, "MyFurnace");
+		GameRegistry.registerTileEntity(TileEntityAlloyForge.class, "AlloyForge");
+		GameRegistry.registerTileEntity(TileEntityBioInit.class, "BiochemicalInitializer");
 		MinecraftForge.setBlockHarvestLevel(flintIngotBlock, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(blockAsh, "shovel", 1);
 		MinecraftForge.setBlockHarvestLevel(flintBlock, "pickaxe", 2);
@@ -180,6 +206,8 @@ public class Loader {
 		MinecraftForge.setBlockHarvestLevel(smoothStairs, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(myFurnaceIdle, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(myFurnaceActive, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(bioInit, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(bioInitIdle, "pickaxe", 1);
 	}
 
 	public static void registerNames(String par1String){
@@ -207,6 +235,8 @@ public class Loader {
 			LanguageRegistry.instance().addStringLocalization("item.flintPlate.name", "en_US", "Flint Chestplate");
 			LanguageRegistry.instance().addStringLocalization("item.flintLeggings.name", "en_US", "Flint Leggings");
 			LanguageRegistry.instance().addStringLocalization("item.flintBoots.name", "en_US", "Flint Boots");
+			LanguageRegistry.instance().addStringLocalization("tile.bioInitIdle.name", "en_US", "Biochemical Initializer");
+			LanguageRegistry.instance().addStringLocalization("item.biomash.name", "en_US", "Biomash");
 		}else if(par1String == "Entities"){
 		}
 	}
@@ -240,10 +270,16 @@ public class Loader {
 		GameRegistry.addRecipe(new ItemStack(plate), new Object[] {"# #", "#0#", "0#0", '#', flintIngot, '0', Item.diamond});
 		GameRegistry.addRecipe(new ItemStack(leggings), new Object[] {"0#0", "# #", "# #", '#', flintIngot, '0', Item.diamond});
 		GameRegistry.addRecipe(new ItemStack(boots), new Object[] {"# #", "0 0", '#', flintIngot, '0', Item.diamond});
+		GameRegistry.addRecipe(new ItemStack(bioInitIdle), new Object[] {"###", "# #", "#B#", '#', Block.stone, 'B',
+			Item.bucketEmpty});
+		GameRegistry.addRecipe(new ItemStack(biomash), new Object[] {"#S#", "SBS", "#S#", '#', Block.dirt, 'S', Item.seeds,
+			'B', new ItemStack(Item.dyePowder, 1, 15)});
 	}
 	
 	public static void registerSmelting(){
 		GameRegistry.addSmelting(flintBlock.blockID, new ItemStack(Loader.flintIngot), 1.0F);
+		AlloyForgeRecipes.smelting().addFuel(Item.bucketLava.itemID, (int) 20000);
+		AlloyForgeRecipes.smelting().addFuel(Item.coal.itemID, (int) 1600);
 		MyFurnaceRecipes.smelting().addSmelting(flintBlock.blockID, new ItemStack(flintIngot, 2), 1.0F);
 		MyFurnaceRecipes.smelting().addSmelting(flintIngotBlock.blockID, new ItemStack(flintIngot, 9), 0.5F);
 	}
@@ -277,4 +313,9 @@ public class Loader {
 	public static ItemFlintArmor plate;
 	public static ItemFlintArmor leggings;
 	public static ItemFlintArmor boots;
+	public static Block alloyForgeIdle;
+	public static Block alloyForgeActive;
+	public static Item biomash;
+	public static Block bioInit;
+	public static Block bioInitIdle;
 }
