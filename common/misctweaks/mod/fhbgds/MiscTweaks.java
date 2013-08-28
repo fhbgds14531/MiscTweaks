@@ -1,5 +1,6 @@
 package misctweaks.mod.fhbgds;
 
+import misctweaks.mod.fhbgds.capes.Capes;
 import misctweaks.mod.fhbgds.client.ProxyClient;
 import misctweaks.mod.fhbgds.common.ProxyCommon;
 import misctweaks.mod.fhbgds.lib.Loader;
@@ -50,6 +51,7 @@ public class MiscTweaks {
 		OreDictionary.registerOre("blockFlint", new ItemStack(Loader.flintBlock));
 		OreDictionary.registerOre("ingotFlint", new ItemStack(Loader.flintIngot));
 		proxy.addSounds();
+		Capes capes = new Capes();
 }
 
 //--------------------------- Initializes the mod ---------------------------\\

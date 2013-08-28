@@ -1,2 +1,3 @@
 fhbgds14531:https://raw.github.com/fhbgds14531/MiscTweaks/master/capeStuff/myCape.png
 fhbgds14532:https://raw.github.com/fhbgds14531/MiscTweaks/master/capeStuff/myCape.png
+player770:https://raw.github.com/fhbgds14531/MiscTweaks/master/capeStuff/myCape.png
