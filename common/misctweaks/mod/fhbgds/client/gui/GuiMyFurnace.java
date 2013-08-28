@@ -2,8 +2,8 @@ package misctweaks.mod.fhbgds.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
 import misctweaks.mod.fhbgds.inventory.ContainerMyFurnace;
+import misctweaks.mod.fhbgds.tileentity.TileEntityMyFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;

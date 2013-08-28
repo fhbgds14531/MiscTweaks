@@ -1,21 +1,15 @@
 package misctweaks.mod.fhbgds;
 
-import java.util.Random;
-
+import misctweaks.mod.fhbgds.client.ProxyClient;
 import misctweaks.mod.fhbgds.common.ProxyCommon;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import misctweaks.mod.fhbgds.util.GuiHandler;
 import misctweaks.mod.fhbgds.world.biome.BiomeDesolatePlains;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.FakePlayer;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -40,6 +34,7 @@ public class MiscTweaks {
 	@SidedProxy(modId = Reference.MOD_ID, serverSide = "misctweaks.mod.fhbgds.common.ProxyCommon",
 			clientSide = "misctweaks.mod.fhbgds.client.ProxyClient")
 		public static ProxyCommon proxy;
+		public static ProxyClient proxyC;
 
 	@Instance(Reference.MOD_ID)
 	public static MiscTweaks instance;
@@ -77,11 +72,4 @@ public class MiscTweaks {
 		BiomeDictionary.registerBiomeType(myBiome1, BiomeDictionary.Type.WASTELAND);
 		System.out.println("[" + Reference.MOD_ID + "] Everything has been successfully broken!");
 	}
-
-@ForgeSubscribe
-	public void spawnEvent (LivingSpawnEvent event){
-		System.out.println("Spawned " + event.entityLiving.getEntityName() + " at: " +event.entityLiving.posX + 
-				", " + event.entityLiving.posY + ", " + event.entityLiving.posZ); 
-	}
-
 }

@@ -7,6 +7,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -45,5 +46,10 @@ public class ItemFlintArmor extends ItemArmor {
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
 		stack.addEnchantment(Enchantment.protection, 5);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack stack1, ItemStack stack2){
+		return stack2.getItem() == Loader.flintIngot? true : (stack2.getItem() == Item.diamond? true: false);
 	}
 }

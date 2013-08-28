@@ -1,6 +1,6 @@
 package misctweaks.mod.fhbgds.render;
 
-import misctweaks.mod.fhbgds.entities.EntityMagic;
+import misctweaks.mod.fhbgds.entity.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.Tessellator;

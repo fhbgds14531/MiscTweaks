@@ -1,38 +1,39 @@
 package misctweaks.mod.fhbgds.lib;
 
-import misctweaks.mod.fhbgds.blocks.AlloyForge;
-import misctweaks.mod.fhbgds.blocks.BioInit;
-import misctweaks.mod.fhbgds.blocks.BlockAsh;
-import misctweaks.mod.fhbgds.blocks.BlockAshHard;
-import misctweaks.mod.fhbgds.blocks.BlockDirtyWater;
-import misctweaks.mod.fhbgds.blocks.BlockFlintBlock;
-import misctweaks.mod.fhbgds.blocks.BlockFlintIngotBlock;
-import misctweaks.mod.fhbgds.blocks.BlockFurnaceBench;
-import misctweaks.mod.fhbgds.blocks.BlockFurnaceBenchOn;
-import misctweaks.mod.fhbgds.blocks.BlockGlowingGlassConnected;
-import misctweaks.mod.fhbgds.blocks.BlockGlowingGlassPane;
-import misctweaks.mod.fhbgds.blocks.BlockMetalSheet;
-import misctweaks.mod.fhbgds.blocks.BlockMetalStack;
-import misctweaks.mod.fhbgds.blocks.BlockQuartzFence;
-import misctweaks.mod.fhbgds.blocks.BlockSmoothQuartz;
-import misctweaks.mod.fhbgds.blocks.BlockSmoothStairs;
-import misctweaks.mod.fhbgds.blocks.MyFurnace;
-import misctweaks.mod.fhbgds.entities.TileEntityAlloyForge;
-import misctweaks.mod.fhbgds.entities.TileEntityBioInit;
-import misctweaks.mod.fhbgds.entities.TileEntityFurnaceBench;
-import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
+import misctweaks.mod.fhbgds.block.BioInit;
+import misctweaks.mod.fhbgds.block.BlockAsh;
+import misctweaks.mod.fhbgds.block.BlockAshHard;
+import misctweaks.mod.fhbgds.block.BlockFlintBlock;
+import misctweaks.mod.fhbgds.block.BlockFlintIngotBlock;
+import misctweaks.mod.fhbgds.block.BlockGlowingGlass;
+import misctweaks.mod.fhbgds.block.BlockGlowingGlassPane;
+import misctweaks.mod.fhbgds.block.BlockMetalSheet;
+import misctweaks.mod.fhbgds.block.BlockMetalStack;
+import misctweaks.mod.fhbgds.block.BlockQuartzFence;
+import misctweaks.mod.fhbgds.block.BlockSmoothQuartz;
+import misctweaks.mod.fhbgds.block.BlockSmoothStairs;
+import misctweaks.mod.fhbgds.block.MyFurnace;
+import misctweaks.mod.fhbgds.block.WoodGenerator;
+import misctweaks.mod.fhbgds.crafting.MyFurnaceRecipes;
 import misctweaks.mod.fhbgds.item.ItemAsh;
 import misctweaks.mod.fhbgds.item.ItemBiomash;
+import misctweaks.mod.fhbgds.item.ItemFertileSapling;
 import misctweaks.mod.fhbgds.item.ItemFlintArmor;
+import misctweaks.mod.fhbgds.item.ItemFlintAxe;
+import misctweaks.mod.fhbgds.item.ItemFlintEpicPick;
 import misctweaks.mod.fhbgds.item.ItemFlintIngot;
 import misctweaks.mod.fhbgds.item.ItemFlintPick;
+import misctweaks.mod.fhbgds.item.ItemFlintSword;
 import misctweaks.mod.fhbgds.item.ItemMagicCore;
 import misctweaks.mod.fhbgds.item.ItemMetalSheet;
+import misctweaks.mod.fhbgds.item.ItemMilkshake;
 import misctweaks.mod.fhbgds.item.ItemStoneStick;
 import misctweaks.mod.fhbgds.item.ItemWand;
 import misctweaks.mod.fhbgds.item.ItemWandCreative;
-import misctweaks.mod.fhbgds.util.AlloyForgeRecipes;
-import misctweaks.mod.fhbgds.util.MyFurnaceRecipes;
+import misctweaks.mod.fhbgds.tileentity.TileEntityBioInit;
+import misctweaks.mod.fhbgds.tileentity.TileEntityMyFurnace;
+import misctweaks.mod.fhbgds.tileentity.TileEntityWoodGenerator;
+import misctweaks.mod.fhbgds.util.CreativeTabMiscTweaks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -42,19 +43,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Loader {
 	
-	public static final CreativeTabs tab = new CreativeTabMiscTweaks("MiscTweaks");
-	public static final EnumToolMaterial FLINT = EnumHelper.addToolMaterial("FLINT", 3, 1800, 10.0F, 6.0F, 15);
+	public static final CreativeTabs tab = new CreativeTabMiscTweaks("MiscTweaks Blocks/Items");
+	public static final CreativeTabs tab1 = new CreativeTabMiscTweaks("MiscTweaks Tools/Combat");
+	public static final EnumToolMaterial FLINT = EnumHelper.addToolMaterial("FLINT", 4, 2000, 15.0F, 7.0F, 15);
 	public static final EnumArmorMaterial FLINT_ARMOR = EnumHelper.addArmorMaterial("FLINT", 50, new int[] {4, 9, 7, 4}, 15);
 	
 	public static void initObjects(){
-		
-		dirtyWater  = new FluidDirtyWater();
 		
 		ash = new ItemAsh(5006).setUnlocalizedName("ash")
 				.setCreativeTab(tab);
@@ -68,9 +67,9 @@ public class Loader {
 			.setUnlocalizedName("flintIngot")
 			.setCreativeTab(tab);
 		
-		flintPick = new ItemFlintPick(5001, FLINT)
+		flintPick = new ItemFlintPick(5098, FLINT)
 			.setUnlocalizedName("flintPick")
-			.setCreativeTab(tab);
+			.setCreativeTab(tab1);
 		
 		stoneStick = new ItemStoneStick(5002)
 			.setUnlocalizedName("cobbleStick")
@@ -78,20 +77,20 @@ public class Loader {
 		
 		wand = new ItemWand(5003, EnumToolMaterial.EMERALD)
 			.setUnlocalizedName("wand")
-			.setCreativeTab(tab);
+			.setCreativeTab(tab1);
 		
 		creativeWand = new ItemWandCreative(5004, EnumToolMaterial.EMERALD)
 			.setUnlocalizedName("creativeWand")
-			.setCreativeTab(tab);
+			.setCreativeTab(tab1);
 		
 		glowingGlassPane = new BlockGlowingGlassPane(514, null, null, Material.glass, false)
 			.setUnlocalizedName("glowingGlassPane").setHardness(0.3F)
 			.setStepSound(Block.soundGlassFootstep).setLightValue(1.0F)
 			.setCreativeTab(tab);
 	
-		glowingGlassConnected = new BlockGlowingGlassConnected(513, Material.glass).setUnlocalizedName("glowingGlass")
+		glowingGlass = new BlockGlowingGlass(513, Material.glass).setUnlocalizedName("glowingGlass")
 			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep)
-			.setLightValue(1.5F).setCreativeTab(tab);
+			.setLightValue(1.0F).setCreativeTab(tab);
 	
 		metalSheet = new BlockMetalSheet(515, Material.iron).setUnlocalizedName("metalSheet");
 	
@@ -109,18 +108,12 @@ public class Loader {
 			.setCreativeTab(tab)
 			.setStepSound(Block.soundStoneFootstep);
 		
-		furnaceBench = new BlockFurnaceBench(518).setUnlocalizedName("furnaceBench")
-				.setHardness(1.5F).setResistance(2.0F);//.setCreativeTab(tab);
-		
-		furnaceBenchOn = new BlockFurnaceBenchOn(519).setUnlocalizedName("furnaceBenchOn")
-				.setHardness(1.5F).setResistance(2.0F);
-		
 		blockAsh = new BlockAsh(254, Material.sand).setUnlocalizedName("blockAsh")
 				.setCreativeTab(tab)
 				.setHardness(0.5F).setStepSound(Block.soundSandFootstep);
 		
 		blockAshHard = new BlockAshHard(255, Material.rock).setUnlocalizedName("blockAshHard")
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tab)
+				.setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tab)
 				.setResistance(1.0F);
 		
 		quartzFence = new BlockQuartzFence(520).setUnlocalizedName("quartzFence")
@@ -129,11 +122,8 @@ public class Loader {
 		smoothStairs = new BlockSmoothStairs(521, Material.rock).setUnlocalizedName("smoothStairs")
 				.setCreativeTab(tab).setHardness(1.0F).setResistance(1.0F);
 		
-		blockDirtyWater = new BlockDirtyWater(522).setUnlocalizedName("blockDirtyWater")
-				;//.setCreativeTab(tab);
-				
 		myFurnaceIdle = new MyFurnace(523, false).setUnlocalizedName("myFurnace")
-				.setCreativeTab(tab).setHardness(4.0F).setResistance(4.0F);
+				.setHardness(4.0F).setResistance(4.0F).setCreativeTab(tab);
 		
 		myFurnaceActive = new MyFurnace(524, true).setUnlocalizedName("myFurnaceActive")
 				.setHardness(4.0F).setResistance(4.0F);
@@ -142,22 +132,16 @@ public class Loader {
 				.setCreativeTab(tab).setHardness(4.5F).setResistance(4.5F);
 		
 		helmet = (ItemFlintArmor) new ItemFlintArmor(5090, 0, FLINT_ARMOR).setUnlocalizedName("flintHelmet")
-				.setCreativeTab(tab);
+				.setCreativeTab(tab1);
 		
 		plate = (ItemFlintArmor) new ItemFlintArmor(5091, 1, FLINT_ARMOR).setUnlocalizedName("flintPlate")
-				.setCreativeTab(tab);
+				.setCreativeTab(tab1);
 		
 		leggings = (ItemFlintArmor) new ItemFlintArmor(5092, 2, FLINT_ARMOR).setUnlocalizedName("flintLeggings")
-				.setCreativeTab(tab);
+				.setCreativeTab(tab1);
 		
 		boots = (ItemFlintArmor) new ItemFlintArmor(5093, 3, FLINT_ARMOR).setUnlocalizedName("flintBoots")
-				.setCreativeTab(tab);
-		
-		alloyForgeIdle = new AlloyForge(526, false).setUnlocalizedName("alloyForge")
-				.setHardness(4.0F).setResistance(4.0F);//.setCreativeTab(tab);
-		
-		alloyForgeActive = new AlloyForge(527, true).setUnlocalizedName("alloyForgeActive")
-				.setHardness(4.0F).setResistance(4.0F);
+				.setCreativeTab(tab1);
 		
 		bioInitIdle = new BioInit(528, false).setUnlocalizedName("bioInitIdle").setCreativeTab(tab)
 				.setHardness(4.0F).setResistance(4.0F);
@@ -166,37 +150,52 @@ public class Loader {
 				.setHardness(4.0F).setResistance(4.0F);
 		
 		biomash = new ItemBiomash(5094).setUnlocalizedName("biomash").setCreativeTab(tab);
+		
+		fertileSapling = new ItemFertileSapling(5095).setUnlocalizedName("fertileSapling").setCreativeTab(tab);
+		
+		woodGeneratorIdle = new WoodGenerator(530, false).setCreativeTab(tab).setUnlocalizedName("woodGen")
+				.setHardness(4).setResistance(4);
+		
+		woodGeneratorActive = new WoodGenerator(531, true).setUnlocalizedName("woodGenOn")
+				.setHardness(4).setResistance(4);
+		
+		milkshake = new ItemMilkshake(5096, 3, 3, false).setUnlocalizedName("milkshake").setCreativeTab(tab).setMaxStackSize(1);
+		
+		flintSword = new ItemFlintSword(5097, FLINT).setUnlocalizedName("flintSword").setCreativeTab(tab1)
+				.setMaxStackSize(1);
+		
+		flintAxe = new ItemFlintAxe(5099, FLINT).setUnlocalizedName("flintAxe").setCreativeTab(tab1).setMaxStackSize(1);
+		
+		epicFlintPick = new ItemFlintEpicPick(5100, FLINT).setUnlocalizedName("epicFlintPick")
+				.setCreativeTab(tab1).setMaxStackSize(1);
 	}
 	
 	public static void registerBlocksAndFluids(){
 		GameRegistry.registerBlock(flintBlock, Reference.MOD_ID + flintBlock.getUnlocalizedName());
 		GameRegistry.registerBlock(glowingGlassPane, Reference.MOD_ID + glowingGlassPane.getUnlocalizedName());
-		GameRegistry.registerBlock(glowingGlassConnected, Reference.MOD_ID + glowingGlassConnected.getUnlocalizedName());
+		GameRegistry.registerBlock(glowingGlass, Reference.MOD_ID + glowingGlass.getUnlocalizedName());
 		GameRegistry.registerBlock(metalSheet, Reference.MOD_ID + metalSheet.getUnlocalizedName());
 		GameRegistry.registerBlock(metalStack, Reference.MOD_ID + metalStack.getUnlocalizedName());
 		GameRegistry.registerBlock(smoothQuartz, Reference.MOD_ID + smoothQuartz.getUnlocalizedName());
-		GameRegistry.registerBlock(furnaceBench, Reference.MOD_ID + furnaceBench.getUnlocalizedName());
 		GameRegistry.registerBlock(blockAsh, Reference.MOD_ID + blockAsh.getUnlocalizedName());
 		GameRegistry.registerBlock(blockAshHard, Reference.MOD_ID + blockAshHard.getUnlocalizedName());
 		GameRegistry.registerBlock(quartzFence, Reference.MOD_ID + quartzFence.getUnlocalizedName());
 		GameRegistry.registerBlock(smoothStairs, Reference.MOD_ID + smoothStairs.getUnlocalizedName());
-		GameRegistry.registerBlock(blockDirtyWater, Reference.MOD_ID + blockDirtyWater.getUnlocalizedName());
 		GameRegistry.registerBlock(myFurnaceIdle, Reference.MOD_ID + myFurnaceIdle.getUnlocalizedName());
 		GameRegistry.registerBlock(myFurnaceActive, Reference.MOD_ID + myFurnaceActive.getUnlocalizedName());
 		GameRegistry.registerBlock(flintIngotBlock, Reference.MOD_ID + flintIngotBlock.getUnlocalizedName());
-		GameRegistry.registerBlock(alloyForgeIdle, Reference.MOD_ID + alloyForgeIdle.getUnlocalizedName());
-		GameRegistry.registerBlock(alloyForgeActive, Reference.MOD_ID + alloyForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(bioInitIdle, Reference.MOD_ID + bioInitIdle.getUnlocalizedName());
 		GameRegistry.registerBlock(bioInit, Reference.MOD_ID + bioInit.getUnlocalizedName());
-		GameRegistry.registerTileEntity(TileEntityFurnaceBench.class, "FurnaceBench");
+		GameRegistry.registerBlock(woodGeneratorActive, Reference.MOD_ID + woodGeneratorActive.getUnlocalizedName());
+		GameRegistry.registerBlock(woodGeneratorIdle, Reference.MOD_ID + woodGeneratorIdle.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityMyFurnace.class, "MyFurnace");
-		GameRegistry.registerTileEntity(TileEntityAlloyForge.class, "AlloyForge");
 		GameRegistry.registerTileEntity(TileEntityBioInit.class, "BiochemicalInitializer");
-		MinecraftForge.setBlockHarvestLevel(flintIngotBlock, "pickaxe", 1);
+		GameRegistry.registerTileEntity(TileEntityWoodGenerator.class, "WoodGenerator");
+		MinecraftForge.setBlockHarvestLevel(flintIngotBlock, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(blockAsh, "shovel", 1);
-		MinecraftForge.setBlockHarvestLevel(flintBlock, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(flintBlock, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(glowingGlassPane, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(glowingGlassConnected, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(glowingGlass, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(metalSheet, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(metalStack, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(smoothQuartz, "pickaxe", 1);
@@ -208,6 +207,8 @@ public class Loader {
 		MinecraftForge.setBlockHarvestLevel(myFurnaceActive, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(bioInit, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(bioInitIdle, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(woodGeneratorActive, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(woodGeneratorIdle, "pickaxe", 1);
 	}
 
 	public static void registerNames(String par1String){
@@ -230,24 +231,32 @@ public class Loader {
 			LanguageRegistry.instance().addStringLocalization("tile.quartzFence.name", "en_US", "Quartz Fance");
 			LanguageRegistry.instance().addStringLocalization("tile.smoothStairs.name", "en_US", "Smooth Stone Stairs");
 			LanguageRegistry.instance().addStringLocalization("tile.myFurnace.name", "en_US", "Implosion Furnace");
+			LanguageRegistry.instance().addStringLocalization("tile.myFurnaceActive.name", "en_US", "Implosion Furnace");
 			LanguageRegistry.instance().addStringLocalization("tile.flintIngotBlock.name", "en_US", "Block of Flint Ingots");
 			LanguageRegistry.instance().addStringLocalization("item.flintHelmet.name", "en_US", "Flint Helmet");
 			LanguageRegistry.instance().addStringLocalization("item.flintPlate.name", "en_US", "Flint Chestplate");
 			LanguageRegistry.instance().addStringLocalization("item.flintLeggings.name", "en_US", "Flint Leggings");
 			LanguageRegistry.instance().addStringLocalization("item.flintBoots.name", "en_US", "Flint Boots");
 			LanguageRegistry.instance().addStringLocalization("tile.bioInitIdle.name", "en_US", "Biochemical Initializer");
+			LanguageRegistry.instance().addStringLocalization("tile.bioInitActive.name", "en_US", "Biochemical Initializer");
 			LanguageRegistry.instance().addStringLocalization("item.biomash.name", "en_US", "Biomash");
+			LanguageRegistry.instance().addStringLocalization("item.fertileSapling.name", "en_US", "Fertile Sapling");
+			LanguageRegistry.instance().addStringLocalization("tile.woodGen.name", "en_US", "Cellulose Synthesizer");
+			LanguageRegistry.instance().addStringLocalization("tile.woodGenOn.name", "en_US", "Cellulose Synthesizer");
+			LanguageRegistry.instance().addStringLocalization("item.milkshake.name", "en_US", "Milkshake");
+			LanguageRegistry.instance().addStringLocalization("item.flintSword.name", "en_US", "Flint Sword");
+			LanguageRegistry.instance().addStringLocalization("item.flintAxe.name", "en_US", "Flint Axe");
 		}else if(par1String == "Entities"){
 		}
 	}
 	
 	public static void registerCrafting(){
 		GameRegistry.addRecipe(new ItemStack(flintBlock), new Object[] {"###", "###", "###", '#', Item.flint});
-		GameRegistry.addRecipe(new ItemStack(glowingGlassConnected, 8), new Object[] {"###", "#G#", "###", '#', Item.glowstone,
+		GameRegistry.addRecipe(new ItemStack(glowingGlass, 8), new Object[] {"###", "#G#", "###", '#', Item.glowstone,
 			'G', Block.glass});
-		GameRegistry.addRecipe(new ItemStack(glowingGlassPane, 16), new Object[] {"###", "###", '#', glowingGlassConnected});
+		GameRegistry.addRecipe(new ItemStack(glowingGlassPane, 16), new Object[] {"###", "###", '#', glowingGlass});
 		GameRegistry.addRecipe(new ItemStack(Item.flint, 9), new Object[] {"#", '#', flintBlock});
-		GameRegistry.addRecipe(new ItemStack(stoneStick), new Object[] {"#", "#", '#', Block.stone});
+		GameRegistry.addRecipe(new ItemStack(stoneStick, 2), new Object[] {"#", "#", '#', Block.stone});
 		GameRegistry.addRecipe(new ItemStack(flintPick), new Object[] {"IDI", "MSM", "MSM", 'I',
 			flintIngot, 'D', Item.diamond, 'S', stoneStick, 'M', itemMetalSheet});
 		GameRegistry.addRecipe(new ItemStack(wand), new Object[] {"SBS", "S#S", "SBS", '#', magicCore, 
@@ -262,7 +271,7 @@ public class Loader {
 		GameRegistry.addRecipe(new ItemStack(blockAsh), new Object[] {"##", "##", '#', ash});
 		GameRegistry.addRecipe(new ItemStack(blockAshHard), new Object[] {"##", "##", '#', blockAsh});
 		GameRegistry.addRecipe(new ItemStack(quartzFence), new Object[] {"###", "###", '#', Item.netherQuartz});
-		GameRegistry.addRecipe(new ItemStack(smoothStairs), new Object[] {"#  ", "## ", "###", '#', Block.stone});
+		GameRegistry.addRecipe(new ItemStack(smoothStairs, 6), new Object[] {"#  ", "## ", "###", '#', Block.stone});
 		GameRegistry.addRecipe(new ItemStack(myFurnaceIdle), new Object[] {"###", "#0#", "###", '#', Block.cobblestone,
 			'0', Block.blockIron});
 		GameRegistry.addRecipe(new ItemStack(flintIngotBlock), new Object[] {"###", "###", "###", '#', flintIngot});
@@ -274,12 +283,19 @@ public class Loader {
 			Item.bucketEmpty});
 		GameRegistry.addRecipe(new ItemStack(biomash), new Object[] {"#S#", "SBS", "#S#", '#', Block.dirt, 'S', Item.seeds,
 			'B', new ItemStack(Item.dyePowder, 1, 15)});
+		GameRegistry.addRecipe(new ItemStack(woodGeneratorIdle), new Object[] {"###", "# #", "#D#", '#', Block.cobblestone, 'D', 
+			Block.dirt});
+		GameRegistry.addRecipe(new ItemStack(fertileSapling), new Object[] {"#B#", "B#B", "#B#", '#', Block.sapling, 'B',
+			new ItemStack(Item.dyePowder, 1, 15)});
+		GameRegistry.addShapelessRecipe(new ItemStack(milkshake), new Object[] {Item.bucketMilk, Item.sugar,
+			Block.ice, Item.glassBottle});
+		GameRegistry.addRecipe(new ItemStack(flintSword), new Object[] {"D#", " #", " S", 'D', Item.diamond, 
+			'#', flintIngot, 'S', stoneStick});
 	}
 	
 	public static void registerSmelting(){
 		GameRegistry.addSmelting(flintBlock.blockID, new ItemStack(Loader.flintIngot), 1.0F);
-		AlloyForgeRecipes.smelting().addFuel(Item.bucketLava.itemID, (int) 20000);
-		AlloyForgeRecipes.smelting().addFuel(Item.coal.itemID, (int) 1600);
+		MyFurnaceRecipes.smelting().addSmelting(Block.wood.blockID, new ItemStack(Item.coal, 1, 1), 0.5F);
 		MyFurnaceRecipes.smelting().addSmelting(flintBlock.blockID, new ItemStack(flintIngot, 2), 1.0F);
 		MyFurnaceRecipes.smelting().addSmelting(flintIngotBlock.blockID, new ItemStack(flintIngot, 9), 0.5F);
 	}
@@ -297,15 +313,11 @@ public class Loader {
 	public static Block metalSheet;
 	public static Block metalStack;
 	public static Block smoothQuartz;
-	public static Block furnaceBench;
-	public static Block furnaceBenchOn;
-	public static Block glowingGlassConnected;
+	public static Block glowingGlass;
 	public static Block blockAsh;
 	public static Block blockAshHard;
 	public static Block quartzFence;
 	public static Block smoothStairs;
-	public static Fluid dirtyWater;
-	public static Block blockDirtyWater;
 	public static Block myFurnaceIdle;
 	public static Block myFurnaceActive;
 	public static Block flintIngotBlock;
@@ -313,9 +325,15 @@ public class Loader {
 	public static ItemFlintArmor plate;
 	public static ItemFlintArmor leggings;
 	public static ItemFlintArmor boots;
-	public static Block alloyForgeIdle;
-	public static Block alloyForgeActive;
 	public static Item biomash;
 	public static Block bioInit;
 	public static Block bioInitIdle;
+	public static Item fertileSapling;
+	public static Block woodGeneratorIdle;
+	public static Block woodGeneratorActive;
+	public static Item milkshake;
+	public static Item flintSword;
+	public static Item flintShovel;
+	public static Item flintAxe;
+	public static Item epicFlintPick;
 }

@@ -1,7 +1,7 @@
 package misctweaks.mod.fhbgds.inventory;
 
-import misctweaks.mod.fhbgds.entities.TileEntityBioInit;
-import misctweaks.mod.fhbgds.util.BioRecipes;
+import misctweaks.mod.fhbgds.crafting.BioRecipes;
+import misctweaks.mod.fhbgds.tileentity.TileEntityBioInit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

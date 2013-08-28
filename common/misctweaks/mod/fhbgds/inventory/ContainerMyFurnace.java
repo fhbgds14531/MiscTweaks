@@ -1,7 +1,7 @@
 package misctweaks.mod.fhbgds.inventory;
 
-import misctweaks.mod.fhbgds.entities.TileEntityMyFurnace;
-import misctweaks.mod.fhbgds.util.MyFurnaceRecipes;
+import misctweaks.mod.fhbgds.crafting.MyFurnaceRecipes;
+import misctweaks.mod.fhbgds.tileentity.TileEntityMyFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

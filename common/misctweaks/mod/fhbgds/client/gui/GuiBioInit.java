@@ -1,7 +1,7 @@
 package misctweaks.mod.fhbgds.client.gui;
 
-import misctweaks.mod.fhbgds.entities.TileEntityBioInit;
 import misctweaks.mod.fhbgds.inventory.ContainerBioInit;
+import misctweaks.mod.fhbgds.tileentity.TileEntityBioInit;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;

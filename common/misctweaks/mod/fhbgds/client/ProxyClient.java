@@ -1,37 +1,29 @@
 package misctweaks.mod.fhbgds.client;
 
-import misctweaks.mod.fhbgds.client.gui.FurnaceBenchGUI;
 import misctweaks.mod.fhbgds.common.ProxyCommon;
-import misctweaks.mod.fhbgds.entities.EntityMagic;
-import misctweaks.mod.fhbgds.inventory.ContainerFurnaceBench;
+import misctweaks.mod.fhbgds.entity.EntityMagic;
+import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.render.RenderMagic;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
+import misctweaks.mod.fhbgds.render.RenderMyBlocks;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ProxyClient extends ProxyCommon{
-
-	private int furnaceBenchGUIID = 0;
-
+	private RenderMyBlocks handler = new RenderMyBlocks();
+	public static int blockRenderID = RenderingRegistry.getNextAvailableRenderId();
+	
 	@Override
 	public void addRenderer(){
 		RenderingRegistry.registerEntityRenderingHandler(EntityMagic.class, new RenderMagic(0));
+		RenderingRegistry.registerBlockHandler(blockRenderID, handler);
 	}
 
 	@Override
 	public void addSounds(){
 	MinecraftForge.EVENT_BUS.register(new SoundEvent());
-	}
-	
-	@Override
-    public Object getClientGuiElement (int guiID, EntityPlayer player, World world, int x, int y, int z){
-		if(guiID == furnaceBenchGUIID){
-			return new FurnaceBenchGUI(new ContainerFurnaceBench());
-		}
-		return null;
 	}
 }

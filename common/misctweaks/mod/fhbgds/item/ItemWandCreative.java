@@ -2,7 +2,7 @@ package misctweaks.mod.fhbgds.item;
 
 import java.util.List;
 
-import misctweaks.mod.fhbgds.entities.EntityMagic;
+import misctweaks.mod.fhbgds.entity.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;

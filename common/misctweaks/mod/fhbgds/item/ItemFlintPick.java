@@ -1,10 +1,12 @@
 package misctweaks.mod.fhbgds.item;
 
+import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -25,7 +27,13 @@ public class ItemFlintPick extends ItemPickaxe {
 	
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-		stack.addEnchantment(Enchantment.efficiency, 5);
-		stack.addEnchantment(Enchantment.unbreaking, 3);
+		stack.addEnchantment(Enchantment.efficiency, 6);
+		stack.addEnchantment(Enchantment.unbreaking, 4);
+//		player.addExperienceLevel(30);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack stack1, ItemStack stack2){
+		return stack2.getItem() == Loader.flintIngot? true : (stack2.getItem() == Item.diamond? true: false);
 	}
 }
