@@ -29,6 +29,10 @@ public class BlockGlowingGlass extends Block {
         return false;
     }
 
+	public int getLightOpacity(World world, int x, int y, int z){
+		return 0;
+	}
+	
     @Override
     public boolean renderAsNormalBlock (){
         return false;

@@ -33,6 +33,7 @@ public class ItemMetalSheet extends Item {
 		subtext.add("sheet might allow you");
 		subtext.add("to move faster.");
 	}
+	
 	@Override
 	public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int par4, int par5,
 			int par6, int par7, float par8, float par9, float par10){

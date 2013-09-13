@@ -1,8 +1,7 @@
 package misctweaks.mod.fhbgds.item;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import misctweaks.mod.fhbgds.util.MiscMethods;
@@ -14,27 +13,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFlintEpicPick extends ItemPickaxe {
+public class ItemEpicFlintShovel extends ItemSpade {
 
-	public ItemFlintEpicPick(int id, EnumToolMaterial par2EnumToolMaterial) {
-		super(id, par2EnumToolMaterial);
+	public ItemEpicFlintShovel(int id, EnumToolMaterial material) {
+		super(id, material);
 	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister){
-		this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":flintPick");
+		this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":flintShovel");
 	}
 	
 	@Override
@@ -49,6 +41,12 @@ public class ItemFlintEpicPick extends ItemPickaxe {
 	}
 	
 	@Override
+    public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2)
+    {
+        return false;
+    }
+	
+	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
         if(entity instanceof EntityPlayer){
         	EntityPlayer entityPlayer = (EntityPlayer) entity;
@@ -56,12 +54,6 @@ public class ItemFlintEpicPick extends ItemPickaxe {
         	if(name == "fhbgds14531" || name == "fhbgds14532") return true;
         }
 		return false;
-    }
-	
-	@Override
-    public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2)
-    {
-        return false;
     }
 	
 	/*  
@@ -77,8 +69,7 @@ public class ItemFlintEpicPick extends ItemPickaxe {
         final Block listBlock = Block.blocksList[listBlockID];
         if (listBlock == null) return super.onBlockStartBreak(stack, x, y, z, player);
         
-        MovingObjectPosition objectPosition = MiscMethods.getMovingObjectPositionFromPlayer(world, player, true); 
-        		//MiscMethods.raytraceFromEntity(world, player, true, 5.0D);
+        MovingObjectPosition objectPosition = MiscMethods.getMovingObjectPositionFromPlayer(world, player, true);
         
         int xRange = 1;
         int yRange = 1;
@@ -110,7 +101,8 @@ public class ItemFlintEpicPick extends ItemPickaxe {
                     Material blockMaterial = world.getBlockMaterial(xPos, yPos, zPos);
                     int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
 
-                    if (block != null && block != Block.bedrock && blockMaterial == Material.rock)
+                    if (block != null && block != Block.bedrock && (blockMaterial == Material.ground || blockMaterial == Material.sand||
+                    		blockMaterial == Material.clay || blockMaterial == Material.snow || blockMaterial == Material.craftedSnow))
                     {
                     	if (!player.capabilities.isCreativeMode)
                     	{
@@ -122,7 +114,7 @@ public class ItemFlintEpicPick extends ItemPickaxe {
                     	}
                         else
                         {
-                        	world.setBlockToAir(xPos, yPos, zPos);
+                        world.setBlockToAir(xPos, yPos, zPos);
                         }
                     }
             	}

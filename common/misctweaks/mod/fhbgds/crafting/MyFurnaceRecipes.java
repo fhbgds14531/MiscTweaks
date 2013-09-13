@@ -33,7 +33,7 @@ public class MyFurnaceRecipes
         this.addSmelting(Block.sand.blockID, new ItemStack(Block.glass, 1), 0.1F);
         this.addSmelting(Block.cobblestone.blockID, new ItemStack(Block.stone, 1), 0.1F);
         this.addSmelting(Item.clay.itemID, new ItemStack(Item.brick, 1), 0.3F);
-        this.addSmelting(Block.blockClay.blockID, new ItemStack(Block.field_111032_cD, 1), 0.35F);
+        this.addSmelting(Block.blockClay.blockID, new ItemStack(Block.hardenedClay, 1), 0.35F);
         this.addSmelting(Block.netherrack.blockID, new ItemStack(Item.netherrackBrick, 1), 0.1F);
     }
 

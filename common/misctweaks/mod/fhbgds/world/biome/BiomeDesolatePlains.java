@@ -37,7 +37,7 @@ public class BiomeDesolatePlains extends BiomeGenBase {
 
 	@Override
 	public void decorate(World world, Random random, int chunkX, int chunkZ){
-		if (random.nextInt(250) == 0){
+		if (random.nextInt(200) == 0){
 			StructureWastelandRuins ruins = new StructureWastelandRuins(0);
 			ComponentScatteredFeatureJunglePyramid pyramid = new ComponentScatteredFeatureJunglePyramid(random, chunkX, chunkZ);
 		    StructureBoundingBox box = pyramid.getBoundingBox();

@@ -1,8 +1,11 @@
 package misctweaks.mod.fhbgds.lib;
 
+import java.util.ArrayList;
+
 import misctweaks.mod.fhbgds.block.BioInit;
 import misctweaks.mod.fhbgds.block.BlockAsh;
 import misctweaks.mod.fhbgds.block.BlockAshHard;
+import misctweaks.mod.fhbgds.block.BlockFertileBlock;
 import misctweaks.mod.fhbgds.block.BlockFlintBlock;
 import misctweaks.mod.fhbgds.block.BlockFlintIngotBlock;
 import misctweaks.mod.fhbgds.block.BlockGlowingGlass;
@@ -12,17 +15,20 @@ import misctweaks.mod.fhbgds.block.BlockMetalStack;
 import misctweaks.mod.fhbgds.block.BlockQuartzFence;
 import misctweaks.mod.fhbgds.block.BlockSmoothQuartz;
 import misctweaks.mod.fhbgds.block.BlockSmoothStairs;
+import misctweaks.mod.fhbgds.block.BlockTempBlock;
 import misctweaks.mod.fhbgds.block.MyFurnace;
 import misctweaks.mod.fhbgds.block.WoodGenerator;
 import misctweaks.mod.fhbgds.crafting.MyFurnaceRecipes;
 import misctweaks.mod.fhbgds.item.ItemAsh;
 import misctweaks.mod.fhbgds.item.ItemBiomash;
+import misctweaks.mod.fhbgds.item.ItemCookedCarrot;
 import misctweaks.mod.fhbgds.item.ItemFertileSapling;
 import misctweaks.mod.fhbgds.item.ItemFlintArmor;
 import misctweaks.mod.fhbgds.item.ItemFlintAxe;
 import misctweaks.mod.fhbgds.item.ItemFlintEpicPick;
 import misctweaks.mod.fhbgds.item.ItemFlintIngot;
 import misctweaks.mod.fhbgds.item.ItemFlintPick;
+import misctweaks.mod.fhbgds.item.ItemFlintShovel;
 import misctweaks.mod.fhbgds.item.ItemFlintSword;
 import misctweaks.mod.fhbgds.item.ItemMagicCore;
 import misctweaks.mod.fhbgds.item.ItemMetalSheet;
@@ -34,15 +40,22 @@ import misctweaks.mod.fhbgds.tileentity.TileEntityBioInit;
 import misctweaks.mod.fhbgds.tileentity.TileEntityMyFurnace;
 import misctweaks.mod.fhbgds.tileentity.TileEntityWoodGenerator;
 import misctweaks.mod.fhbgds.util.CreativeTabMiscTweaks;
+import misctweaks.mod.fhbgds.util.PlayerTracker;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -50,6 +63,7 @@ public class Loader {
 	
 	public static final CreativeTabs tab = new CreativeTabMiscTweaks("MiscTweaks Blocks/Items");
 	public static final CreativeTabs tab1 = new CreativeTabMiscTweaks("MiscTweaks Tools/Combat");
+	public static final Material placeholder = new Material(MapColor.airColor).setReplaceable();
 	public static final EnumToolMaterial FLINT = EnumHelper.addToolMaterial("FLINT", 4, 2000, 15.0F, 7.0F, 15);
 	public static final EnumArmorMaterial FLINT_ARMOR = EnumHelper.addArmorMaterial("FLINT", 50, new int[] {4, 9, 7, 4}, 15);
 	
@@ -168,9 +182,18 @@ public class Loader {
 		
 		epicFlintPick = new ItemFlintEpicPick(5100, FLINT).setUnlocalizedName("epicFlintPick")
 				.setCreativeTab(tab1).setMaxStackSize(1);
+		
+		cookedCarrot = new ItemCookedCarrot(5101, 10, 100, false).setUnlocalizedName("cookedCarrot").setCreativeTab(tab);
+		
+		fertileDirt = new BlockFertileBlock(532, Material.ground).setUnlocalizedName("fertileDirt").setCreativeTab(tab)
+				.setHardness(0.6f).setStepSound(Block.soundPowderFootstep);
+		
+		flintShovel = new ItemFlintShovel(5102, FLINT).setUnlocalizedName("flintShovel").setCreativeTab(tab1);
+		
+		tempBlock = new BlockTempBlock(532, placeholder).setUnlocalizedName("tempBlock").setHardness(0).setResistance(0);
 	}
 	
-	public static void registerBlocksAndFluids(){
+	public static void gameRegistryStuff(){
 		GameRegistry.registerBlock(flintBlock, Reference.MOD_ID + flintBlock.getUnlocalizedName());
 		GameRegistry.registerBlock(glowingGlassPane, Reference.MOD_ID + glowingGlassPane.getUnlocalizedName());
 		GameRegistry.registerBlock(glowingGlass, Reference.MOD_ID + glowingGlass.getUnlocalizedName());
@@ -188,9 +211,12 @@ public class Loader {
 		GameRegistry.registerBlock(bioInit, Reference.MOD_ID + bioInit.getUnlocalizedName());
 		GameRegistry.registerBlock(woodGeneratorActive, Reference.MOD_ID + woodGeneratorActive.getUnlocalizedName());
 		GameRegistry.registerBlock(woodGeneratorIdle, Reference.MOD_ID + woodGeneratorIdle.getUnlocalizedName());
+		GameRegistry.registerBlock(fertileDirt, Reference.MOD_ID + fertileDirt.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityMyFurnace.class, "MyFurnace");
 		GameRegistry.registerTileEntity(TileEntityBioInit.class, "BiochemicalInitializer");
 		GameRegistry.registerTileEntity(TileEntityWoodGenerator.class, "WoodGenerator");
+		GameRegistry.registerPlayerTracker(new PlayerTracker());
+		MinecraftForge.setBlockHarvestLevel(fertileDirt, "shovel", 1);
 		MinecraftForge.setBlockHarvestLevel(flintIngotBlock, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(blockAsh, "shovel", 1);
 		MinecraftForge.setBlockHarvestLevel(flintBlock, "pickaxe", 1);
@@ -246,11 +272,17 @@ public class Loader {
 			LanguageRegistry.instance().addStringLocalization("item.milkshake.name", "en_US", "Milkshake");
 			LanguageRegistry.instance().addStringLocalization("item.flintSword.name", "en_US", "Flint Sword");
 			LanguageRegistry.instance().addStringLocalization("item.flintAxe.name", "en_US", "Flint Axe");
+			LanguageRegistry.instance().addStringLocalization("item.cookedCarrot.name", "en_US", "Cooked Carrot");
+			LanguageRegistry.instance().addStringLocalization("item.epicFlintPick.name", "en_US", "Epic Flint Pickaxe");
+			LanguageRegistry.instance().addStringLocalization("tile.fertileDirt.name", "en_US", "Fertile Dirt");
+			LanguageRegistry.instance().addStringLocalization("tile.metalSheet.name", "en_US", "Metal Sheet");
 		}else if(par1String == "Entities"){
 		}
 	}
 	
 	public static void registerCrafting(){
+		
+		//=========================================== Adding Recipes ================================================
 		GameRegistry.addRecipe(new ItemStack(flintBlock), new Object[] {"###", "###", "###", '#', Item.flint});
 		GameRegistry.addRecipe(new ItemStack(glowingGlass, 8), new Object[] {"###", "#G#", "###", '#', Item.glowstone,
 			'G', Block.glass});
@@ -291,13 +323,46 @@ public class Loader {
 			Block.ice, Item.glassBottle});
 		GameRegistry.addRecipe(new ItemStack(flintSword), new Object[] {"D#", " #", " S", 'D', Item.diamond, 
 			'#', flintIngot, 'S', stoneStick});
+		GameRegistry.addRecipe(new ItemStack(epicFlintPick), new Object[] {"#D#", " S ", " S ", '#', flintIngotBlock, 'D',
+			Block.blockDiamond, 'S', Block.blockIron});
+		GameRegistry.addRecipe(new ItemStack(flintAxe), new Object[] {"D# ", "#S ", " S ", 'D', Item.diamond, '#',
+			flintIngot, 'S', stoneStick});
+		for (int i = 0; i < 16; ++i)
+        {
+            GameRegistry.addRecipe(new ItemStack(Block.cloth, 1, i), new Object[] {"#", "#", "#", '#', new ItemStack(Block.carpet, 1, i)});
+        }
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 2, 15), new Object[] {Item.bone});
+		
+		
+		//==================================== Removing Recipes ======================================================
+		
+		removeRecipe(new ItemStack(Item.dyePowder, 3, 15));
+	}
+	
+	public static void registerOres(){
+		oreDictionary("blockFlint", (flintBlock));
+		oreDictionary("blockIngotFlint", (flintIngotBlock));
+		oreDictionary("ingotFlint", (flintIngot));
+	}
+	
+	public static void oreDictionary(String name, Block oreStack){
+		OreDictionary.registerOre(name, new ItemStack(oreStack));
+		System.out.println("[MiscTweaks] Registered '" + oreStack.getLocalizedName() + "' with the Ore Dictionary as: '" + name +"'");
+	}
+	
+	public static void oreDictionary(String name, Item oreStack){
+		OreDictionary.registerOre(name, new ItemStack(oreStack));
+		System.out.println("[MiscTweaks] Registered '" + oreStack.getItemDisplayName(new ItemStack(oreStack)) + "' with the Ore Dictionary as: '" + name +"'");
 	}
 	
 	public static void registerSmelting(){
 		GameRegistry.addSmelting(flintBlock.blockID, new ItemStack(Loader.flintIngot), 1.0F);
+		GameRegistry.addSmelting(Item.carrot.itemID, new ItemStack(cookedCarrot), 1.0F);
+		MyFurnaceRecipes.smelting().addSmelting(Item.carrot.itemID, new ItemStack(cookedCarrot), 1.0F);
 		MyFurnaceRecipes.smelting().addSmelting(Block.wood.blockID, new ItemStack(Item.coal, 1, 1), 0.5F);
 		MyFurnaceRecipes.smelting().addSmelting(flintBlock.blockID, new ItemStack(flintIngot, 2), 1.0F);
 		MyFurnaceRecipes.smelting().addSmelting(flintIngotBlock.blockID, new ItemStack(flintIngot, 9), 0.5F);
+		MyFurnaceRecipes.smelting().addSmelting(Item.rottenFlesh.itemID, new ItemStack(Item.leather, 2), 1);
 	}
 	
 	public static Item ash;
@@ -336,4 +401,43 @@ public class Loader {
 	public static Item flintShovel;
 	public static Item flintAxe;
 	public static Item epicFlintPick;
+	public static Item cookedCarrot;
+	public static Block fertileDirt;
+	public static Block tempBlock;
+	
+	
+	/**
+	 * Removes vanilla crafting recipes.
+	 * 
+	 * @author pigalot
+	 * @author yope_fried
+	 * @param resultItem - The {@link ItemStack} result of the recipe to be removed. 
+	 */
+	private static void removeRecipe(ItemStack resultItem)
+	{
+	    ItemStack recipeResult = null;
+	    ArrayList recipes = (ArrayList) CraftingManager.getInstance().getRecipeList();
+
+	    for (int scan = 0; scan < recipes.size(); scan++)
+	    {
+	        IRecipe tmpRecipe = (IRecipe) recipes.get(scan);
+	        if (tmpRecipe instanceof ShapedRecipes)
+	        {
+	            ShapedRecipes recipe = (ShapedRecipes)tmpRecipe;
+	            recipeResult = recipe.getRecipeOutput();
+	        }
+
+	        if (tmpRecipe instanceof ShapelessRecipes)
+	        {
+	            ShapelessRecipes recipe = (ShapelessRecipes)tmpRecipe;
+	            recipeResult = recipe.getRecipeOutput();
+	        }
+
+	        if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
+	        {
+	            System.out.println("[" + Reference.MOD_NAME + "] Removed Recipe: " + recipes.get(scan) + " -> " + recipeResult);
+	            recipes.remove(scan);
+	        }
+	    }
+	}
 }

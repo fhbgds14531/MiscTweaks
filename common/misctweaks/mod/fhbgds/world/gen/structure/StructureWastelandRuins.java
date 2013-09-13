@@ -39,7 +39,7 @@ public class StructureWastelandRuins extends StructureComponent{
     public boolean addComponentParts(World world, Random random, StructureBoundingBox sBB){
 		
     	int y = (int) (world.getTopSolidOrLiquidBlock(sBB.minX, sBB.minZ) - Math.floor((random.nextFloat() * 3.7)));
-    	//System.out.println("[" + Reference.MOD_ID + "] Generating ruins at: " + sBB.minX + ", " + y + ", " + sBB.minZ);
+    	System.out.println("[" + Reference.MOD_ID + "] Generating ruins at: " + sBB.minX + ", " + y + ", " + sBB.minZ);
 		
     	//----------Floor----------------------
     	for(int x = sBB.minX; x <= sBB.maxX; ++x){

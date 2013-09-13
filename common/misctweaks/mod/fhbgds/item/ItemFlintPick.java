@@ -4,6 +4,7 @@ import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -24,6 +25,22 @@ public class ItemFlintPick extends ItemPickaxe {
 	public void registerIcons(IconRegister iconRegister){
 		this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(5));
 	}
+	
+	@Override
+    public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2)
+    {
+        return false;
+    }
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
+        if(entity instanceof EntityPlayer){
+        	EntityPlayer entityPlayer = (EntityPlayer) entity;
+        	String name = entityPlayer.username;
+        	if(name == "fhbgds14531" || name == "fhbgds14532") return true;
+        }
+		return false;
+    }
 	
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {

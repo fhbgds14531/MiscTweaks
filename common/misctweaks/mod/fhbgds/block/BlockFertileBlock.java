@@ -2,17 +2,19 @@ package misctweaks.mod.fhbgds.block;
 
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.IPlantable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFlintIngotBlock extends Block {
+public class BlockFertileBlock extends BlockDirt {
 
-	public BlockFlintIngotBlock(int id, Material material) {
-		super(id, material);
+	public BlockFertileBlock(int par1, Material par2Material) {
+		super(par1);
 	}
 
 	@Override
@@ -22,12 +24,12 @@ public class BlockFlintIngotBlock extends Block {
 	}
 	
 	@Override
-	public boolean isBeaconBase(World worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ){
+	public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant){
 		return true;
 	}
 	
 	@Override
-	public boolean canEntityDestroy(World world, int x, int y, int z, Entity entity){
-		return false;
+	public boolean isFertile(World world, int x, int y, int z){
+		return true;
 	}
 }

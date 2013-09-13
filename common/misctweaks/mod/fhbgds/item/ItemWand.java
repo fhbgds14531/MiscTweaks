@@ -72,7 +72,7 @@ public class ItemWand extends ItemBow{
         
         float f = (float)j / 20.0F;
 
-        EntityMagic projectile = new EntityMagic(world, player, 5, 1, 10);
+        EntityMagic projectile = new EntityMagic(world, player, 5, 3, 75);
 
         world.spawnEntityInWorld(projectile);
         projectile.worldObj.playSoundAtEntity(player, "misctweaks:pew", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);

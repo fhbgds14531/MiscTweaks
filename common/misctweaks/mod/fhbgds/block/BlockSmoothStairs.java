@@ -23,4 +23,14 @@ public class BlockSmoothStairs extends BlockStairs {
 	public Icon getIcon(int side, int data){
 		return Block.stone.getBlockTextureFromSide(side);
 	}
+	
+	@Override
+	public boolean isOpaqueCube(){
+		return false;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock(){
+		return false;
+	}
 }

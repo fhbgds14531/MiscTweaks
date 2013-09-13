@@ -74,10 +74,10 @@ public class EntityMagic extends EntityThrowable{
 		return 0.0F;
 	}
 	
-//	@Override
-//	protected void entityInit(){
-//		this.renderDistanceWeight = 10.0D;
-//	}
+	@Override
+	protected void entityInit(){
+		this.renderDistanceWeight = 10.0D;
+	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
@@ -125,8 +125,18 @@ public class EntityMagic extends EntityThrowable{
 	public float getExplosionSize(){
 		return this.explosionSize;
 	}
-	
-	public String getTextureFileLoc(){
-		return "assets/misctweaks/textures/items/magicCore.png";
-	}
+
+    /**
+     * Gets how bright this entity is.
+     */
+    public float getBrightness(float par1)
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float par1)
+    {
+        return 15728880;
+    }
 }

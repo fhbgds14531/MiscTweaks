@@ -1,6 +1,5 @@
 package misctweaks.mod.fhbgds;
 
-import misctweaks.mod.fhbgds.capes.Capes;
 import misctweaks.mod.fhbgds.client.ProxyClient;
 import misctweaks.mod.fhbgds.common.ProxyCommon;
 import misctweaks.mod.fhbgds.lib.Loader;
@@ -11,8 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -48,22 +46,21 @@ public class MiscTweaks {
 	public void PreInit(FMLPreInitializationEvent event){
 		System.out.println("[" + Reference.MOD_ID + "] Preparing to break everything.");
 		Loader.initObjects();
-		OreDictionary.registerOre("blockFlint", new ItemStack(Loader.flintBlock));
-		OreDictionary.registerOre("ingotFlint", new ItemStack(Loader.flintIngot));
+		Loader.registerOres();
 		proxy.addSounds();
-		Capes capes = new Capes();
 }
 
 //--------------------------- Initializes the mod ---------------------------\\
 @EventHandler
 	public void Init(FMLInitializationEvent event){
-		Loader.registerBlocksAndFluids();
+		Loader.gameRegistryStuff();
 		Loader.registerNames("Blocks/Items");
 		Loader.registerNames("Entities");
 		Loader.registerCrafting();
 		Loader.registerSmelting();
 		proxy.addRenderer();
 		NetworkRegistry.instance().registerGuiHandler(this, gui);
+		MinecraftForge.EVENT_BUS.register(new misctweaks.mod.fhbgds.util.EventHandler());
 }
 
 //--------------------------- Post-Initializes the mod ---------------------------\\

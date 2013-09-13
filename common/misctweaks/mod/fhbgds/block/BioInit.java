@@ -2,6 +2,7 @@ package misctweaks.mod.fhbgds.block;
 
 import java.util.Random;
 
+import misctweaks.mod.fhbgds.client.ProxyClient;
 import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.tileentity.TileEntityBioInit;
 import net.minecraft.block.Block;
@@ -27,6 +28,7 @@ public class BioInit extends BlockContainer
 	int x, y, z;
 	World myWorld;
 	TileEntityBioInit myTile;
+	int direction;
     /**
      * Is the random generator used by furnace to drop the inventory contents in random directions.
      */
@@ -108,19 +110,16 @@ public class BioInit extends BlockContainer
             }
 
             par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+            this.direction = b0;
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
     public Icon getIcon(int par1, int par2)
     {
 //ADD "animated" textures
-        return par1 == 1 ? this.furnaceIconTop : (par1 == 0 ? this.furnaceIconTop : (par1 != par2 ? this.blockIcon : 
-        	(this.furnaceIconFront)));
+        return par1 == 1 || par1 == 0 || par1 != par2 ? this.blockIcon : this.furnaceIconFront;
     }
 
     @SideOnly(Side.CLIENT)

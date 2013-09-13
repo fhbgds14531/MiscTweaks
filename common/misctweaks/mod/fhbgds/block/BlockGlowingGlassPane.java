@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,6 +19,10 @@ public class BlockGlowingGlassPane extends BlockPane{
 	public BlockGlowingGlassPane(int id, String s1, String s2, Material par4Material, boolean dropSelf) {
 		super(id, null, null, par4Material, dropSelf);
 		this.blockParticleGravity = -1.0F;
+	}
+	
+	public int getLightOpacity(World world, int x, int y, int z){
+		return 0;
 	}
 	
 	public boolean shouldConnect(IBlockAccess blockAccess, int x, int y, int z, int id){

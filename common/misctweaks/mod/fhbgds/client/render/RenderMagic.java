@@ -1,4 +1,4 @@
-package misctweaks.mod.fhbgds.render;
+package misctweaks.mod.fhbgds.client.render;
 
 import misctweaks.mod.fhbgds.entity.EntityMagic;
 import misctweaks.mod.fhbgds.lib.Loader;
@@ -31,12 +31,12 @@ public class RenderMagic extends Render{
     public void doRenderMagic(EntityMagic par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
-        this.func_110777_b(par1Entity);
+        this.bindEntityTexture(par1Entity);
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         float f2 = this.field_77002_a;
         GL11.glScalef(f2 / 1.0F, f2 / 1.0F, f2 / 1.0F);
-        Icon icon = Item.snowball.getIconFromDamage(0);
+        Icon icon = Loader.magicCore.getIconFromDamage(0);
         Tessellator tessellator = Tessellator.instance;
         float f3 = icon.getMinU();
         float f4 = icon.getMaxU();
@@ -69,7 +69,7 @@ public class RenderMagic extends Render{
     }
     
     @Override
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110790_a((EntityMagic)par1Entity);
     }
