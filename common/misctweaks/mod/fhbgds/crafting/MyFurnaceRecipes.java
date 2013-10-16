@@ -35,6 +35,14 @@ public class MyFurnaceRecipes
         this.addSmelting(Item.clay.itemID, new ItemStack(Item.brick, 1), 0.3F);
         this.addSmelting(Block.blockClay.blockID, new ItemStack(Block.hardenedClay, 1), 0.35F);
         this.addSmelting(Block.netherrack.blockID, new ItemStack(Item.netherrackBrick, 1), 0.1F);
+        this.addSmelting(Item.plateGold.itemID, new ItemStack(Item.ingotGold, 4), 1);
+        this.addSmelting(Item.helmetGold.itemID, new ItemStack(Item.ingotGold, 2), 1);
+        this.addSmelting(Item.legsGold.itemID, new ItemStack(Item.ingotGold, 3), 1);
+        this.addSmelting(Item.bootsGold.itemID, new ItemStack(Item.ingotGold, 2), 1);
+        this.addSmelting(Item.plateIron.itemID, new ItemStack(Item.ingotIron, 4), 1);
+        this.addSmelting(Item.helmetIron.itemID, new ItemStack(Item.ingotIron, 2), 1);
+        this.addSmelting(Item.legsIron.itemID, new ItemStack(Item.ingotIron, 3), 1);
+        this.addSmelting(Item.bootsIron.itemID, new ItemStack(Item.ingotIron, 2), 1);
     }
 
     public void addSmelting(int par1, ItemStack par2ItemStack, float par3)

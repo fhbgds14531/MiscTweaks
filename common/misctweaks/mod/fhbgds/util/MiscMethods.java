@@ -2,6 +2,7 @@ package misctweaks.mod.fhbgds.util;
 
 import java.util.Random;
 
+import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockCrops;
@@ -21,6 +22,8 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class MiscMethods {
 	private static Random miscRand = new Random();
+	
+	
 
 	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3)
     {
@@ -195,4 +198,27 @@ public class MiscMethods {
             return true;
         }
     }
+	
+	public static void spawnBlockParticles(World world, EntityPlayer player, int x, int y, int z, String name, String purpose){
+		
+		if(name != null){
+		
+			for(int i = 1; i <= 16; i++){
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+				world.spawnParticle(name, x + miscRand.nextFloat(), y + miscRand.nextFloat(), z + miscRand.nextFloat(), 0, 0, 0);
+			}
+		}else{
+			System.err.println("[" + Reference.MOD_NAME + "] Error spawning particles for " + purpose);
+		}
+	}
+	
+	public static void teleportRandom(World world, Entity entity, double currentX, double currentY, double currentZ){
+		
+	}
 }

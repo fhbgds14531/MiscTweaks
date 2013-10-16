@@ -1,7 +1,14 @@
 package misctweaks.mod.fhbgds.entity;
 
+import java.util.Random;
+
 import misctweaks.mod.fhbgds.lib.Reference;
+import misctweaks.mod.fhbgds.util.MiscMethods;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -14,16 +21,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityMagic extends EntityThrowable{
 	
-	public final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID + ":textures/items/magicCore.png");
+	public final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, "textures/items/magicCore.png");
 	private float damage = 0.0F;
 	private float explosionSize;
 	private int range;
+	private Random rand = new Random();
+	private DamageSource magic;
+	private EntityPlayer player;
 
 	public EntityMagic(World world, EntityLivingBase player, float damage, float explosionSize, int range){
 		super(world, player);
 		this.setDamage(damage);
 		this.setExplosionSize(explosionSize);
 		this.setRange(range);
+		this.player = (EntityPlayer) player;
+		magic = DamageSource.causePlayerDamage((EntityPlayer) player);
 	}
 
 	private void setRange(int range) {
@@ -35,19 +47,36 @@ public class EntityMagic extends EntityThrowable{
 		switch (event.typeOfHit) {
 		case ENTITY:
 			if (event.entityHit != null) {
-				for(int i = 0; i < 20; i++){
-					this.worldObj.spawnParticle("splash", this.posX , this.posY, this.posZ, 0.0, -0.5, 0.0);
+				Entity entity = event.entityHit;
+				if(entity instanceof EntityPlayer){
+					MiscMethods.spawnBlockParticles(worldObj, null, (int)this.posX, (int)this.posY, (int)this.posZ, "smokelarge", "EntityMagic hit");
+				
+					this.worldObj.playSoundAtEntity(event.entityHit, "mob.irongolem.throw", 1.0f, 1.0f);
+				
+					
+					
+					event.entityHit.attackEntityFrom(magic, this.getDamage());
+				}else{
+					if(entity instanceof EntityLiving){
+						MiscMethods.spawnBlockParticles(worldObj, null, (int)this.posX, (int)this.posY, (int)this.posZ, "smokelarge", "EntityMagic hit");
+					
+						int a = rand.nextInt(), b = rand.nextInt(), c = rand.nextInt();
+						
+						if(a > 100)  a =  50;
+						if(a < -100) a = -50;
+						if(b > 100)  a =  50;
+						if(b < -100) a = -50;
+						if(c > 100)  a =  50;
+						if(c < -100) a = -50;
+						
+						if((EntityLiving) entity instanceof EntityMob) ((EntityLiving)entity).setRevengeTarget(this.player);
+					}
 				}
-				this.worldObj.playSoundAtEntity(event.entityHit, "mob.irongolem.throw", 1.0f, 1.0f);
-				event.entityHit.attackEntityFrom(DamageSource.magic, this.getDamage());
 			}
 			break;
 		case TILE:
 			
-			for(int i = 0; i < 20; i++){
-				this.worldObj.spawnParticle("splash", this.posX , this.posY, this.posZ, 0.0, -0.5, 0.0);
-			}
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.getExplosionSize(), false);
+			MiscMethods.spawnBlockParticles(worldObj, null, (int)this.posX, (int)this.posY, (int)this.posZ, "smokelarge", "EntityMagic death");
 			break;
 		default:
 			break;
@@ -93,9 +122,10 @@ public class EntityMagic extends EntityThrowable{
 		super.onEntityUpdate();
 		if (this.ticksExisted > this.getMaxLifetime()) {
 			for(int i = 0; i < 10; i++){
-			this.worldObj.spawnParticle("splash", this.posX , this.posY, this.posZ, 0.0, -0.5, 0.0);
+			MiscMethods.spawnBlockParticles(worldObj, null, (int)this.posX, (int)this.posY, (int)this.posZ, "smokelarge", "EntityMagic death");
 			}
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 1, false);
+			this.worldObj.playSoundAtEntity(this, "poof", 1, 1);
+//			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 1, false);
 			this.setDead();
 			
 		}

@@ -153,28 +153,28 @@ public class MyFurnace extends BlockContainer
     /**
      * Update which block ID the furnace is using depending on whether or not it is burning
      */
-    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
+    public static void updateBlockState(boolean par0, World world, int x, int y, int z)
     {
-        int l = par1World.getBlockMetadata(par2, par3, par4);
-        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        int l = world.getBlockMetadata(x, y, z);
+        TileEntity tileentity = world.getBlockTileEntity(x, y, z);
         keepFurnaceInventory = true;
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, Loader.myFurnaceActive.blockID);
+            world.setBlock(x, y, z, Loader.myFurnaceActive.blockID);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Loader.myFurnaceIdle.blockID);
+            world.setBlock(x, y, z, Loader.myFurnaceIdle.blockID);
         }
 
         keepFurnaceInventory = false;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+        world.setBlockMetadataWithNotify(x, y, z, l, 2);
 
         if (tileentity != null)
         {
             tileentity.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
+            world.setBlockTileEntity(x, y, z, tileentity);
         }
     }
 

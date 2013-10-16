@@ -6,6 +6,7 @@ import misctweaks.mod.fhbgds.lib.Loader;
 import misctweaks.mod.fhbgds.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -140,4 +141,14 @@ public class StructureWastelandRuins extends StructureComponent{
     	}
         return true;
     }
+
+	@Override
+	protected void func_143012_a(NBTTagCompound nbttagcompound) {
+		
+	}
+
+	@Override
+	protected void func_143011_b(NBTTagCompound nbttagcompound) {
+		
+	}
 }

@@ -19,7 +19,8 @@ public class CreativeTabMiscTweaks extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack(){
 		//return new ItemStack(Loader.flintIngot);
-		return this.myLabel == "MiscTweaks Blocks/Items"? new ItemStack(Loader.flintIngot) : new ItemStack(Loader.flintPick);
+		return this.myLabel == "MiscTweaks Blocks/Items"? new ItemStack(Loader.flintIngot) : 
+			(this.myLabel == "MiscTweaks Asthetics" ? new ItemStack(Loader.ceilingPanel, 1, 0) : new ItemStack(Loader.flintPick));
 	}
 	
 	@Override

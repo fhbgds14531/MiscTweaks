@@ -21,6 +21,6 @@ public class ProxyClient extends ProxyCommon{
 
 	@Override
 	public void addSounds(){
-	MinecraftForge.EVENT_BUS.register(new SoundEvent());
+		MinecraftForge.EVENT_BUS.register(new SoundEvent());
 	}
 }

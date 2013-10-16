@@ -13,8 +13,13 @@ public class PlayerTracker implements IPlayerTracker {
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
 		ChatMessageComponent hello = new ChatMessageComponent().addText(greeting + player.username);
-		player.sendChatToPlayer(hello);
+		ChatMessageComponent hello1 = new ChatMessageComponent().addText("<MiscTweaks> Sup, bro?");
+		if(!player.getEntityName().substring(0, 5).contains("fhbgds")){
+			player.sendChatToPlayer(hello);
+		}else{
+			player.sendChatToPlayer(hello1);
 		}
+	}
 
 	@Override
 	public void onPlayerLogout(EntityPlayer player) {}

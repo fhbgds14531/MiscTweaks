@@ -300,7 +300,7 @@ public class TileEntityMyFurnace extends TileEntity implements ISidedInventory
             if (flag != this.furnaceBurnTime > 0)
             {
                 flag1 = true;
-                MyFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                MyFurnace.updateBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
         }
 

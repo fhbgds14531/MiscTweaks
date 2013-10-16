@@ -19,5 +19,5 @@ public class SoundEvent {
             System.err.println("Sound error");
         }
 
-}
+    }
 }
