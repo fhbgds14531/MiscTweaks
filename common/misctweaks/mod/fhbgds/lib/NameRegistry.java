@@ -44,6 +44,7 @@ public class NameRegistry {
 			LanguageRegistry.instance().addStringLocalization("tile.fertileDirt.name", "en_US", "Fertile Dirt");
 			LanguageRegistry.instance().addStringLocalization("tile.metalSheet.name", "en_US", "Metal Sheet");
 			LanguageRegistry.instance().addStringLocalization("tile.ceilingPanel.name", "en_US", "Ceiling Panel");
+			LanguageRegistry.instance().addStringLocalization("item.flintShovel.name", "en_US", "Flint Shovel");
 		}else if(par1String == "Entities"){
 		}
 	}

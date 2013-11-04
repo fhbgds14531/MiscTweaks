@@ -27,7 +27,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @NetworkMod(serverSideRequired = false, clientSideRequired = true)
 
 public class MiscTweaks {
-	
 	public static GuiHandler gui = new GuiHandler();
 	
 	@SidedProxy(modId = Reference.MOD_ID, serverSide = "misctweaks.mod.fhbgds.common.ProxyCommon",
@@ -64,9 +63,9 @@ public class MiscTweaks {
 //--------------------------- Post-Initializes the mod ---------------------------\\
 @EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
-		BiomeGenBase myBiome1 = new BiomeDesolatePlains(26);
-		GameRegistry.addBiome(myBiome1);
-		BiomeDictionary.registerBiomeType(myBiome1, BiomeDictionary.Type.WASTELAND);
+		if(cpw.mods.fml.common.Loader.isModLoaded("Herobrine")){
+			System.out.println("[MiscTweaks] RUN! HEROBRINE IS HERE!");
+		}
 		System.out.println("[" + Reference.MOD_ID + "] Everything has been successfully broken!");
 	}
 }
